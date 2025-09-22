@@ -35,6 +35,7 @@ function App() {
     experiencia: '', usa_prediccion: '', importancia_recomendaciones: '', comentarios: ''
   });
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [currentTip, setCurrentTip] = useState(0);
   const [showSuccessAnimation, setShowSuccessAnimation] = useState('');
@@ -136,8 +137,17 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('¡Formulario enviado exitosamente!');
+
+    // Guardar los datos del formulario
     console.log('Datos del formulario:', form);
+
+    // Marcar como enviado exitosamente  
+    setIsSubmitted(true);
+
+    // Redirección automática después de 3 segundos
+    setTimeout(() => {
+      window.location.href = 'src/plataforma.html';
+    }, 3000);
   };
 
   return (
@@ -620,24 +630,38 @@ function App() {
               </button>
             </div>
 
-            {/* Botón de envío */}
+            // La sección del botón de envío modificada
             <div className="text-center">
               <button
                 type="submit"
-                disabled={progress < 50}
-                className={`py-4 px-12 rounded-full text-lg font-bold shadow-lg transition-all duration-300 ${progress >= 50
-                  ? 'bg-green-500 hover:bg-green-600 text-white cursor-pointer hover:scale-105'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                disabled={progress < 50 || isSubmitted}
+                className={`py-4 px-12 rounded-full text-lg font-bold shadow-lg transition-all duration-300 ${isSubmitted
+                    ? 'bg-green-600 text-white cursor-not-allowed'
+                    : progress >= 50
+                      ? 'bg-green-500 hover:bg-green-600 text-white cursor-pointer hover:scale-105'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }`}
               >
-                {progress < 50 ? 'Complete más campos...' : 'Enviar Formulario'}
+                {isSubmitted
+                  ? '✅ Formulario Enviado'
+                  : progress < 50
+                    ? 'Complete más campos...'
+                    : 'Enviar Formulario'
+                }
               </button>
 
               <p className="mt-3 text-sm text-gray-600">
-                {progress < 50 ?
-                  'Complete al menos el 50% del formulario' :
+                {isSubmitted ? (
+                  <span className="flex items-center justify-center gap-2 text-blue-600 font-semibold animate-pulse">
+                    <span>🚀</span>
+                    Te redireccionaremos al login en unos segundos
+                    <span>⏳</span>
+                  </span>
+                ) : progress < 50 ? (
+                  'Complete al menos el 50% del formulario'
+                ) : (
                   '¡Listo para enviar!'
-                }
+                )}
               </p>
             </div>
           </form>
