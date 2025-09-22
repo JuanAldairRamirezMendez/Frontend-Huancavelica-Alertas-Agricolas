@@ -315,6 +315,9 @@ function App() {
                 <div>
                   <label className="block mb-2 text-base font-medium text-gray-700">
                     Teléfono *
+                    {form.telefono && /^\+51\s?\d{3}\s?\d{3}\s?\d{3}$/.test(form.telefono) && (
+                      <span className="ml-2 text-green-500 animate-bounce">✓</span>
+                    )}
                   </label>
                   <input
                     name="telefono"
