@@ -39,8 +39,8 @@ function showAlertDetail(alertId) {
 
 // Función para compartir alerta
 function shareAlert() {
-    // Simular compartir por WhatsApp
-    alert('Función de compartir por WhatsApp simulada. En una app real, esto abriría WhatsApp con el mensaje de la alerta.');
+    // Simular compartir por Telegram
+    alert('Función de compartir por Telegram simulada. En una app real, esto abriría Telegram con el mensaje de la alerta.');
 }
 
 // --- NUEVA FUNCIÓN DE LOGIN ---

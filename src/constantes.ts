@@ -27,7 +27,7 @@ export const problemas = [
 
 export const medios = [
   { value: 'sms', label: 'SMS' },
-  { value: 'whatsapp', label: 'WhatsApp' },
+  { value: 'Telegram', label: 'Telegram' },
   { value: 'email', label: 'Correo electrónico' },
   { value: 'app', label: 'Aplicación móvil' },
 ];
