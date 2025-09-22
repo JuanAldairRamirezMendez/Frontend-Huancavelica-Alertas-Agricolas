@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>AgroAlerta Huancavelica</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="app-container">
+
+        <!-- Pantalla de Login -->
+        <div id="login" class="screen active">
+            <div class="login-container">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <h1>AgroAlerta</h1>
+                    <p>Huancavelica</p>
+                </div>
+                <div class="login-form">
+                    <h2>Iniciar Sesión</h2>
+                    <p>Ingrese para recibir alertas agrícolas personalizadas.</p>
+                    <div class="input-group">
+                        <i class="fas fa-mobile-alt"></i>
+                        <input type="tel" id="phone" placeholder="Número de celular">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Contraseña (use su DNI)">
+                    </div>
+                    <button class="login-button" onclick="login()">Ingresar</button>
+                    <div class="login-footer">
+                        <a href="#">¿Olvidó su contraseña?</a>
+                        <a href="index.html">Registrarse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla Principal (Dashboard) -->
+        <div id="dashboard" class="screen">
+            <header class="app-header">
+                <div class="user-info">
+                    <span class="welcome-text">Bienvenido de nuevo,</span>
+                    <h1 class="user-name">Usuario</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-button"><i class="fas fa-bell"></i><span class="badge">3</span></button>
+                    <button class="icon-button"><i class="fas fa-user-circle"></i></button>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <!-- Alerta Principal -->
+                <section id="mainAlert" class="main-alert-card frost" onclick="showAlertDetail('frost-123')">
+                    <div class="alert-icon"><i class="fas fa-snowflake"></i></div>
+                    <div class="alert-info">
+                        <h2>Alerta de Helada Severa</h2>
+                        <p>Esta noche en tu zona. <span class="details-link">Ver detalles</span></p>
+                    </div>
+                </section>
+
+                <!-- Acciones Rápidas -->
+                <section class="quick-actions">
+                    <div class="action-item">
+                        <i class="fas fa-cloud-sun-rain"></i>
+                        <span>Pronóstico</span>
+                    </div>
+                    <div class="action-item">
+                        <i class="fas fa-seedling"></i>
+                        <span>Mis Cultivos</span>
+                    </div>
+                    <div class="action-item">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Recomendaciones</span>
+                    </div>
+                    <div class="action-item">
+                        <i class="fas fa-headset"></i>
+                        <span>Soporte</span>
+                    </div>
+                </section>
+
+                <!-- Resumen del Clima -->
+                <section class="weather-summary">
+                    <h3 class="section-title">Clima Hoy en tu Zona</h3>
+                    <div class="weather-card">
+                        <div class="weather-main">
+                            <i class="fas fa-sun"></i>
+                            <div class="temperature">14°C</div>
+                            <div class="condition">Soleado</div>
+                        </div>
+                        <div class="weather-details">
+                            <div class="detail-item">
+                                <span>Max</span>
+                                <span>18°C</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Min</span>
+                                <span>-2°C</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Viento</span>
+                                <span>12 km/h</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Últimas Noticias -->
+                <section class="latest-news">
+                    <h3 class="section-title">Noticias y Consejos</h3>
+                    <div class="news-card">
+                        <img src="https://via.placeholder.com/80" alt="Noticia">
+                        <div class="news-content">
+                            <h4>Nuevas técnicas de riego para la sierra</h4>
+                            <p>Descubre cómo optimizar el uso del agua en tus cultivos de altura...</p>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="https://via.placeholder.com/80" alt="Noticia">
+                        <div class="news-content">
+                            <h4>Fertilizantes orgánicos: una guía completa</h4>
+                            <p>Aprende a preparar y utilizar abonos naturales para mejorar tu cosecha...</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+        
+        <!-- Pantalla de Alertas -->
+        <div id="alerts" class="screen">
+            <header class="app-header nav-back">
+                 <i class="fas fa-arrow-left"></i>
+                 <h1>Mis Alertas</h1>
+            </header>
+            <main class="main-content">
+                <div class="alert-list">
+                    <div class="alert-item high" onclick="showAlertDetail('frost-123')">
+                        <div class="alert-item-icon"><i class="fas fa-snowflake"></i></div>
+                        <div class="alert-item-info">
+                            <h3>Helada Severa</h3>
+                            <p>Hoy, 11:00 PM - Riesgo Alto</p>
+                        </div>
+                        <div class="alert-item-time">Ahora</div>
+                    </div>
+                    <div class="alert-item medium" onclick="showAlertDetail('rain-124')">
+                        <div class="alert-item-icon"><i class="fas fa-cloud-showers-heavy"></i></div>
+                        <div class="alert-item-info">
+                            <h3>Lluvia Intensa</h3>
+                            <p>Mañana, 08:00 AM - Riesgo Moderado</p>
+                        </div>
+                        <div class="alert-item-time">Ayer</div>
+                    </div>
+                    <div class="alert-item low" onclick="showAlertDetail('wind-125')">
+                        <div class="alert-item-icon"><i class="fas fa-wind"></i></div>
+                        <div class="alert-item-info">
+                            <h3>Vientos Fuertes</h3>
+                            <p>Vie, 24 May - Riesgo Bajo</p>
+                        </div>
+                        <div class="alert-item-time">22/05</div>
+                    </div>
+                     <div class="alert-item info" onclick="showAlertDetail('info-126')">
+                        <div class="alert-item-icon"><i class="fas fa-info-circle"></i></div>
+                        <div class="alert-item-info">
+                            <h3>Actualización del sistema</h3>
+                            <p>Nuevas funciones disponibles en la app.</p>
+                        </div>
+                        <div class="alert-item-time">20/05</div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <!-- Pantalla de Detalle de Alerta -->
+        <div id="alert-detail" class="screen">
+            <header class="app-header nav-back">
+                <i class="fas fa-arrow-left"></i>
+                <h1>Detalle de Alerta</h1>
+            </header>
+            <main class="main-content">
+                <div class="alert-detail-card">
+                    <div class="detail-header frost">
+                        <div class="detail-icon"><i class="fas fa-snowflake"></i></div>
+                        <div class="detail-title">
+                            <h2>Alerta de Helada Severa</h2>
+                            <p>Publicado: 23 de Mayo, 8:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="detail-content">
+                        <div class="detail-section risk-level">
+                            <h3 class="section-title">Nivel de Riesgo: ALTO</h3>
+                            <div class="risk-bar high"></div>
+                        </div>
+                        
+                        <div class="detail-section info-grid">
+                            <div class="info-item">
+                                <div class="info-label">Temperatura Mín.</div>
+                                <div class="info-value">-5°C</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Hora Crítica</div>
+                                <div class="info-value">04:00 - 06:00 AM</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Duración</div>
+                                <div class="info-value">4 horas</div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3 class="section-title">Zonas Afectadas</h3>
+                            <p>Huancavelica centro, Ascensión, Yauli y zonas aledañas por encima de los 3600 msnm.</p>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3 class="section-title">Recomendaciones Clave</h3>
+                            <ul class="recommendations">
+                                <li><i class="fas fa-check-circle"></i> <strong>Cobertura de cultivos:</strong> Utilice mantas térmicas o plásticos para proteger las plantas más sensibles.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Riego controlado:</strong> Un riego ligero por la tarde puede ayudar a que el suelo retenga calor.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Evitar fertilización:</strong> No fertilice antes de una helada, ya que el nuevo crecimiento es más vulnerable.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="detail-actions">
+                            <button class="action-button primary"><i class="fas fa-video"></i> Ver tutorial</button>
+                            <button class="action-button secondary" onclick="shareAlert()"><i class="fas fa-share-alt"></i> Compartir</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+
+        <!-- Footer de Navegación -->
+        <footer class="app-footer">
+            <div class="nav-item active" data-screen="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </div>
+            <div class="nav-item" data-screen="alerts">
+                <i class="fas fa-bell"></i>
+                <span>Alertas</span>
+            </div>
+            <div class="nav-item fab" data-screen="new-report">
+                <i class="fas fa-plus"></i>
+            </div>
+            <div class="nav-item" data-screen="recommendations">
+                <i class="fas fa-tasks"></i>
+                <span>Tareas</span>
+            </div>
+            <div class="nav-item" data-screen="profile">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
