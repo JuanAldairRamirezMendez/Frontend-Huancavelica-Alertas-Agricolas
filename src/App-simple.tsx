@@ -6,7 +6,7 @@ type FormData = {
   dni: string;
   telefono: string;
   email: string;
-  region: string;
+  provincia: string;
   extension: string;
   cultivos: string[];
   problemas_clima: string;
@@ -18,8 +18,15 @@ type FormData = {
   comentarios: string;
 };
 
-const regiones = [
-  'Lima', 'Cusco', 'Arequipa', 'La Libertad', 'Piura', 'Junín', 'Cajamarca', 'Otro'
+const provincia = [
+  'Huancavelica (Ciudad)',
+  'Provincia de Acobamba',
+  'Provincia de Angaraes', 
+  'Provincia de Castrovirreyna',
+  'Provincia de Churcampa',
+  'Provincia de Huaytará',
+  'Provincia de Tayacaja',
+  'Otro distrito de Huancavelica'
 ];
 
 const extensiones = [
@@ -68,7 +75,7 @@ const importancia = [
 
 function App() {
   const [form, setForm] = useState<FormData>({
-    nombre: '', dni: '', telefono: '', email: '', region: '', extension: '', 
+    nombre: '', dni: '', telefono: '', email: '', provincia: '', extension: '', 
     cultivos: [], problemas_clima: '', altitud: '', medio_alerta: '', 
     experiencia: '', usa_prediccion: '', importancia_recomendaciones: '', comentarios: ''
   });
@@ -117,26 +124,26 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-300 via-blue-200 to-purple-300 py-4 px-2 sm:py-8 sm:px-4 lg:px-8">
-      <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-10 shadow-xl">
+    <div className="min-h-screen px-2 py-4 bg-gradient-to-br from-green-300 via-blue-200 to-purple-300 sm:py-8 sm:px-4 lg:px-8">
+      <div className="max-w-4xl p-4 mx-auto shadow-xl bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl lg:rounded-3xl sm:p-6 lg:p-10">
         
         {/* Encabezado */}
-        <div className="text-center mb-6 sm:mb-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-700 mb-3 flex items-center justify-center gap-2">
+        <div className="mb-6 text-center sm:mb-8">
+          <h1 className="flex items-center justify-center gap-2 mb-3 text-3xl font-bold text-green-700 sm:text-4xl lg:text-5xl">
             🌾 Sistema Agrícola
           </h1>
-          <p className="text-gray-600 text-base sm:text-lg lg:text-xl mb-4 font-medium">
+          <p className="mb-4 text-base font-medium text-gray-600 sm:text-lg lg:text-xl">
             Formulario de Registro
           </p>
           
           {/* Instrucciones claras para adultos mayores - Mejora #5 */}
-          <div className="max-w-2xl mx-auto mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+          <div className="max-w-2xl p-4 mx-auto mb-6 border border-blue-200 rounded-lg bg-blue-50">
             <div className="flex items-center justify-center gap-2 mb-3">
               <span className="text-2xl">📋</span>
-              <h3 className="font-bold text-blue-700 text-lg">Instrucciones Sencillas</h3>
+              <h3 className="text-lg font-bold text-blue-700">Instrucciones Sencillas</h3>
               <span className="text-2xl">🤝</span>
             </div>
-            <div className="text-sm text-blue-800 space-y-2">
+            <div className="space-y-2 text-sm text-blue-800">
               <p>• ⏰ <strong>Sin prisa:</strong> Puede tomarse todo el tiempo que necesite</p>
               <p>• 💾 <strong>Se guarda solo:</strong> Sus datos se guardan automáticamente cada pocos segundos</p>
               <p>• ⏸️ <strong>Pause cuando guste:</strong> Puede cerrar esta página y continuar después</p>
@@ -147,13 +154,13 @@ function App() {
           
           {/* Barra de progreso simple */}
           <div className="max-w-md mx-auto mb-6">
-            <div className="flex justify-between text-sm font-medium text-gray-600 mb-2">
+            <div className="flex justify-between mb-2 text-sm font-medium text-gray-600">
               <span>Progreso</span>
               <span className="text-green-600">{progress}%</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
+            <div className="w-full h-3 bg-gray-200 rounded-full">
               <div 
-                className="bg-green-500 h-3 rounded-full transition-all duration-300"
+                className="h-3 transition-all duration-300 bg-green-500 rounded-full"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -163,18 +170,18 @@ function App() {
         <form onSubmit={handleSubmit} className="space-y-8">
           
           {/* Datos Personales */}
-          <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-            <h2 className="text-xl font-bold text-blue-700 mb-4 flex items-center gap-2">
+          <div className="p-6 border border-blue-200 bg-blue-50 rounded-xl">
+            <h2 className="flex items-center gap-2 mb-4 text-xl font-bold text-blue-700">
               👤 Datos Personales
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <label className="block mb-2 font-medium text-gray-700 text-base">
+                <label className="block mb-2 text-base font-medium text-gray-700">
                   Nombre completo *
                   {form.nombre && <span className="ml-2 text-green-500">✓</span>}
                 </label>
                 <div className="space-y-2">
-                  <p className="text-xs text-gray-500 bg-blue-50 p-2 rounded border-l-4 border-blue-300">
+                  <p className="p-2 text-xs text-gray-500 border-l-4 border-blue-300 rounded bg-blue-50">
                     💡 <strong>Instrucción:</strong> Escriba su nombre completo como aparece en su DNI
                   </p>
                   <input 
@@ -190,7 +197,7 @@ function App() {
                     placeholder="Ejemplo: Juan Carlos Pérez López" 
                   />
                   {form.nombre.length > 0 && form.nombre.length < 3 && (
-                    <p className="text-xs text-amber-600 flex items-center gap-1">
+                    <p className="flex items-center gap-1 text-xs text-amber-600">
                       <span>⚠️</span> Por favor, ingrese su nombre completo
                     </p>
                   )}
@@ -198,12 +205,12 @@ function App() {
               </div>
 
               <div>
-                <label className="block mb-2 font-medium text-gray-700 text-base">
+                <label className="block mb-2 text-base font-medium text-gray-700">
                   DNI *
                   {form.dni.length === 8 && <span className="ml-2 text-green-500">✓</span>}
                 </label>
                 <div className="space-y-2">
-                  <p className="text-xs text-gray-500 bg-blue-50 p-2 rounded border-l-4 border-blue-300">
+                  <p className="p-2 text-xs text-gray-500 border-l-4 border-blue-300 rounded bg-blue-50">
                     💡 <strong>Instrucción:</strong> Ingrese solo los 8 números de su DNI (sin puntos ni guiones)
                   </p>
                   <input 
@@ -227,12 +234,12 @@ function App() {
                       Dígitos: {form.dni.length}/8
                     </div>
                     {form.dni.length > 0 && form.dni.length < 8 && (
-                      <p className="text-amber-600 flex items-center gap-1">
+                      <p className="flex items-center gap-1 text-amber-600">
                         <span>⚠️</span> Faltan {8 - form.dni.length} dígitos
                       </p>
                     )}
                     {form.dni.length === 8 && (
-                      <p className="text-green-600 flex items-center gap-1">
+                      <p className="flex items-center gap-1 text-green-600">
                         <span>✅</span> DNI completo
                       </p>
                     )}
@@ -241,7 +248,7 @@ function App() {
               </div>
 
               <div>
-                <label className="block mb-2 font-medium text-gray-700 text-base">
+                <label className="block mb-2 text-base font-medium text-gray-700">
                   Teléfono *
                 </label>
                 <input 
@@ -249,13 +256,13 @@ function App() {
                   value={form.telefono} 
                   onChange={handleChange} 
                   required 
-                  className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200" 
+                  className="w-full px-4 py-3 text-base transition-all duration-200 border-2 border-gray-300 rounded-lg outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200" 
                   placeholder="+51 999 888 777" 
                 />
               </div>
 
               <div>
-                <label className="block mb-2 font-medium text-gray-700 text-base">
+                <label className="block mb-2 text-base font-medium text-gray-700">
                   Email *
                 </label>
                 <input 
@@ -264,7 +271,7 @@ function App() {
                   value={form.email} 
                   onChange={handleChange} 
                   required 
-                  className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200" 
+                  className="w-full px-4 py-3 text-base transition-all duration-200 border-2 border-gray-300 rounded-lg outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200" 
                   placeholder="ejemplo@correo.com" 
                 />
               </div>
@@ -272,37 +279,37 @@ function App() {
           </div>
 
           {/* Información Agrícola */}
-          <div className="bg-green-50 p-6 rounded-xl border border-green-200">
-            <h2 className="text-xl font-bold text-green-700 mb-4 flex items-center gap-2">
+          <div className="p-6 border border-green-200 bg-green-50 rounded-xl">
+            <h2 className="flex items-center gap-2 mb-4 text-xl font-bold text-green-700">
               🌱 Información Agrícola
             </h2>
             
             <div className="space-y-6">
-              {/* Región */}
+              {/* provincia */}
               <div>
-                <label className="block mb-2 font-medium text-gray-700 text-base">
-                  1. ¿En qué región se encuentra su cultivo? *
+                <label className="block mb-2 text-base font-medium text-gray-700">
+                  1. ¿En qué distrito se encuentra su cultivo? *
                 </label>
                 <select 
-                  name="region" 
-                  value={form.region} 
+                  name="provincia" 
+                  value={form.provincia} 
                   onChange={handleChange} 
                   required 
-                  className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200"
+                  className="w-full px-4 py-3 text-base transition-all duration-200 border-2 border-gray-300 rounded-lg outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
                 >
-                  <option value="">Seleccione una región</option>
-                  {regiones.map(r => <option key={r} value={r.toLowerCase()}>{r}</option>)}
+                  <option value="">Seleccione una opción</option>
+                  {provincia.map(r => <option key={r} value={r.toLowerCase()}>{r}</option>)}
                 </select>
               </div>
 
               {/* Extensión */}
               <div>
-                <label className="block mb-3 font-medium text-gray-700 text-base">
+                <label className="block mb-3 text-base font-medium text-gray-700">
                   2. Extensión de su terreno:
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   {extensiones.map(ext => (
-                    <label key={ext.value} className="flex items-center p-3 bg-white border-2 border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-green-500 transition-all duration-200">
+                    <label key={ext.value} className="flex items-center p-3 transition-all duration-200 bg-white border-2 border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-green-500">
                       <input 
                         type="radio" 
                         name="extension" 
@@ -319,15 +326,15 @@ function App() {
 
               {/* Cultivos */}
               <div>
-                <label className="block mb-3 font-medium text-gray-700 text-base">
+                <label className="block mb-3 text-base font-medium text-gray-700">
                   3. ¿Qué cultivos maneja? (Seleccione los que apliquen)
                   {form.cultivos.length > 0 && (
-                    <span className="ml-2 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold">
+                    <span className="px-2 py-1 ml-2 text-xs font-bold text-green-700 bg-green-100 rounded-full">
                       {form.cultivos.length} seleccionado{form.cultivos.length > 1 ? 's' : ''}
                     </span>
                   )}
                 </label>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
                   {cultivos.map(c => {
                     const isSelected = form.cultivos.includes(c);
                     const iconMap = {
@@ -348,7 +355,7 @@ function App() {
                           onChange={handleChange} 
                           className="sr-only" 
                         />
-                        <span className="text-lg mr-2">{iconMap[c as keyof typeof iconMap]}</span>
+                        <span className="mr-2 text-lg">{iconMap[c as keyof typeof iconMap]}</span>
                         <span className="text-base font-medium">{c}</span>
                         {isSelected && (
                           <span className="ml-auto text-green-500">✓</span>
@@ -364,7 +371,7 @@ function App() {
                 <label className="block mb-3 font-medium text-gray-700">
                   4. ¿Con qué frecuencia experimenta problemas climáticos?
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   {problemas.map(p => (
                     <label key={p.value} className="flex items-center p-3 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                       <input 
@@ -403,7 +410,7 @@ function App() {
                 <label className="block mb-3 font-medium text-gray-700">
                   6. ¿Qué medio prefiere para recibir alertas?
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   {medios.map(m => (
                     <label key={m.value} className="flex items-center p-3 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                       <input 
@@ -441,7 +448,7 @@ function App() {
                 <label className="block mb-3 font-medium text-gray-700">
                   8. ¿Utiliza algún sistema de predicción climática?
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
                   {prediccion.map(p => (
                     <label key={p.value} className="flex items-center p-3 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                       <input 
@@ -463,7 +470,7 @@ function App() {
                 <label className="block mb-3 font-medium text-gray-700">
                   9. ¿Qué tan importante considera recibir recomendaciones personalizadas?
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   {importancia.map(i => (
                     <label key={i.value} className="flex items-center p-3 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                       <input 
@@ -491,7 +498,7 @@ function App() {
                   onChange={handleChange} 
                   rows={4} 
                   placeholder="Escriba sus sugerencias aquí..." 
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-green-500 focus:ring-1 focus:ring-green-500 resize-none" 
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:border-green-500 focus:ring-1 focus:ring-green-500" 
                 />
               </div>
             </div>
@@ -502,7 +509,7 @@ function App() {
             <button
               type="button"
               onClick={() => alert('📱 Te enviaremos un recordatorio amigable para continuar cuando puedas. ¡Sin presión!')}
-              className="mb-4 bg-gradient-to-r from-blue-100 to-indigo-100 hover:from-blue-200 hover:to-indigo-200 text-blue-700 py-3 px-6 rounded-full font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center gap-2 mx-auto"
+              className="flex items-center gap-2 px-6 py-3 mx-auto mb-4 font-semibold text-blue-700 transition-all duration-200 transform rounded-full shadow-md bg-gradient-to-r from-blue-100 to-indigo-100 hover:from-blue-200 hover:to-indigo-200 hover:shadow-lg hover:scale-105"
             >
               <span className="text-lg">⏰</span>
               Continuar después

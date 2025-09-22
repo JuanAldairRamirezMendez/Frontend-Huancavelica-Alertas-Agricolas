@@ -6,7 +6,7 @@ type FormData = {
   dni: string;
   telefono: string;
   email: string;
-  region: string;
+  provincia: string;
   extension: string;
   cultivos: string[];
   problemas_clima: string;
@@ -18,8 +18,15 @@ type FormData = {
   comentarios: string;
 };
 
-const regiones = [
-  'Lima', 'Cusco', 'Arequipa', 'La Libertad', 'Piura', 'Junín', 'Cajamarca', 'Otro'
+const provincia = [
+  'Huancavelica (Ciudad)',
+  'Provincia de Acobamba',
+  'Provincia de Angaraes', 
+  'Provincia de Castrovirreyna',
+  'Provincia de Churcampa',
+  'Provincia de Huaytará',
+  'Provincia de Tayacaja',
+  'Otro distrito de Huancavelica'
 ];
 
 const extensiones = [
@@ -68,7 +75,7 @@ const importancia = [
 
 function App() {
   const [form, setForm] = useState<FormData>({
-    nombre: '', dni: '', telefono: '', email: '', region: '', extension: '', 
+    nombre: '', dni: '', telefono: '', email: '', provincia: '', extension: '', 
     cultivos: [], problemas_clima: '', altitud: '', medio_alerta: '', 
     experiencia: '', usa_prediccion: '', importancia_recomendaciones: '', comentarios: ''
   });
@@ -158,47 +165,46 @@ function App() {
   };
 
   return (
-    <div className="fixed inset-0 w-screen h-screen bg-gradient-to-br from-green-300 via-blue-200 to-purple-300 overflow-auto">
-      <div className="min-h-screen w-full py-4 px-2 sm:py-8 sm:px-4 lg:px-8">
-        <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-10 shadow-xl">
+    <div className="fixed inset-0 w-screen h-screen overflow-auto bg-gradient-to-br from-green-300 via-blue-200 to-purple-300">
+      <div className="w-full min-h-screen px-2 py-4 sm:py-8 sm:px-4 lg:px-8">
+        <div className="max-w-4xl p-4 mx-auto shadow-xl bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl lg:rounded-3xl sm:p-6 lg:p-10">
         
         {/* Encabezado con animaciones */}
-        <div className="text-center mb-6 sm:mb-8 animate-fade-in">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-700 mb-3 flex items-center justify-center gap-2">
-            🌾 Sistema Agrícola 🌾
+        <div className="mb-6 text-center sm:mb-8 animate-fade-in">
+          <h1 className="flex items-center justify-center gap-2 mb-3 text-3xl font-bold text-green-700 sm:text-4xl lg:text-5xl">
+            🌾Plataforma de Alertas Tempranas para Agricultores de Huancavelica🌾
           </h1>
-          <p className="text-gray-600 text-base sm:text-lg lg:text-xl mb-4 font-medium">
-            Formulario de Registro
+          <p className="mb-4 text-base font-medium text-gray-600 sm:text-lg lg:text-xl">
+            Formulario de Registro de Agricultores
           </p>
-          
           {/* Mensaje de bienvenida con animación */}
           {showWelcomeAnimation && (
-            <div className="animate-fade-in bg-gradient-to-r from-green-100 to-blue-100 p-4 rounded-lg border border-green-200 mb-4 animate-glow">
+            <div className="p-4 mb-4 border border-green-200 rounded-lg animate-fade-in bg-gradient-to-r from-green-100 to-blue-100 animate-glow">
               <div className="flex items-center justify-center gap-2 text-green-700">
                 <span className="text-2xl animate-bounce">👋</span>
                 <p className="font-semibold">¡Bienvenido! Vamos paso a paso, sin prisa</p>
-                <span className="text-2xl animate-bounce delay-150">😊</span>
+                <span className="text-2xl delay-150 animate-bounce">😊</span>
               </div>
             </div>
           )}
           
           {/* Barra de progreso con animaciones */}
           {/* Barra de progreso con animaciones */}
-          <div className="max-w-md mx-auto mb-6 animate-fade-in delay-500">
-            <div className="flex justify-between text-sm font-medium text-gray-600 mb-2">
+          <div className="max-w-md mx-auto mb-6 delay-500 animate-fade-in">
+            <div className="flex justify-between mb-2 text-sm font-medium text-gray-600">
               <span>Progreso</span>
-              <span className="text-green-600 font-bold animate-bounce">{progress}%</span>
+              <span className="font-bold text-green-600 animate-bounce">{progress}%</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+            <div className="w-full h-3 overflow-hidden bg-gray-200 rounded-full">
               <div 
-                className="bg-gradient-to-r from-green-400 to-green-500 h-3 rounded-full transition-all duration-1000 ease-out animate-shimmer"
+                className="h-3 transition-all duration-1000 ease-out rounded-full bg-gradient-to-r from-green-400 to-green-500 animate-shimmer"
                 style={{ width: `${progress}%` }}
               />
             </div>
             <div className="flex justify-center mt-3">
               {progress === 100 && (
-                <div className="animate-bounce bg-green-100 text-green-600 px-4 py-2 rounded-full border border-green-300">
-                  <span className="text-sm font-bold flex items-center gap-2">
+                <div className="px-4 py-2 text-green-600 bg-green-100 border border-green-300 rounded-full animate-bounce">
+                  <span className="flex items-center gap-2 text-sm font-bold">
                     <span className="animate-spin">✨</span> 
                     ¡Formulario completado! 
                     <span className="animate-spin">✨</span>
@@ -206,24 +212,24 @@ function App() {
                 </div>
               )}
               {progress > 0 && progress < 30 && (
-                <div className="animate-fade-in bg-blue-50 text-blue-600 px-3 py-2 rounded-full border border-blue-200">
-                  <span className="text-xs font-medium flex items-center gap-2">
+                <div className="px-3 py-2 text-blue-600 border border-blue-200 rounded-full animate-fade-in bg-blue-50">
+                  <span className="flex items-center gap-2 text-xs font-medium">
                     <span className="animate-pulse">🌱</span> 
                     ¡Excelente inicio! Siga a su ritmo
                   </span>
                 </div>
               )}
               {progress >= 30 && progress < 60 && (
-                <div className="animate-fade-in bg-yellow-50 text-yellow-600 px-3 py-2 rounded-full border border-yellow-200">
-                  <span className="text-xs font-medium flex items-center gap-2">
+                <div className="px-3 py-2 text-yellow-600 border border-yellow-200 rounded-full animate-fade-in bg-yellow-50">
+                  <span className="flex items-center gap-2 text-xs font-medium">
                     <span className="animate-pulse">🌿</span> 
                     ¡Muy buen progreso! Va por buen camino
                   </span>
                 </div>
               )}
               {progress >= 60 && progress < 100 && (
-                <div className="animate-fade-in bg-green-50 text-green-600 px-3 py-2 rounded-full border border-green-200">
-                  <span className="text-xs font-medium flex items-center gap-2">
+                <div className="px-3 py-2 text-green-600 border border-green-200 rounded-full animate-fade-in bg-green-50">
+                  <span className="flex items-center gap-2 text-xs font-medium">
                     <span className="animate-pulse">🌟</span> 
                     ¡Casi terminado! Solo faltan algunos campos
                   </span>
@@ -236,14 +242,14 @@ function App() {
         <form onSubmit={handleSubmit} className="space-y-8">
           
           {/* Datos Personales con animaciones */}
-          <div className="bg-blue-50 p-6 rounded-xl border border-blue-200 animate-fade-in delay-700 hover:shadow-lg transition-all duration-300">
-            <h2 className="text-xl font-bold text-blue-700 mb-4 flex items-center gap-2 animate-float">
+          <div className="p-6 transition-all duration-300 delay-700 border border-blue-200 bg-blue-50 rounded-xl animate-fade-in hover:shadow-lg">
+            <h2 className="flex items-center gap-2 mb-4 text-xl font-bold text-blue-700 animate-float">
               <span className="animate-bounce">👤</span> 
               Datos Personales
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="relative">
-                <label className="block mb-2 font-medium text-gray-700 text-base">
+                <label className="block mb-2 text-base font-medium text-gray-700">
                   Nombre completo *
                   {form.nombre && (
                     <span className={`ml-2 text-green-500 animate-bounce ${showSuccessAnimation === 'nombre' ? 'animate-pulse' : ''}`}>
@@ -252,12 +258,12 @@ function App() {
                   )}
                 </label>
                 {showSuccessAnimation === 'nombre' && (
-                  <div className="absolute -top-2 -right-2 text-green-500 text-2xl animate-bounce">
+                  <div className="absolute text-2xl text-green-500 -top-2 -right-2 animate-bounce">
                     🎉
                   </div>
                 )}
                 <div className="space-y-2">
-                  <p className="text-xs text-gray-500 bg-blue-50 p-2 rounded border-l-4 border-blue-300">
+                  <p className="p-2 text-xs text-gray-500 border-l-4 border-blue-300 rounded bg-blue-50">
                     💡 <strong>Instrucción:</strong> Escriba su nombre completo como aparece en su DNI
                   </p>
                   <input 
@@ -273,7 +279,7 @@ function App() {
                     placeholder="Ejemplo: Juan Carlos Pérez López" 
                   />
                   {form.nombre.length > 0 && form.nombre.length < 3 && (
-                    <p className="text-xs text-amber-600 flex items-center gap-1">
+                    <p className="flex items-center gap-1 text-xs text-amber-600">
                       <span>⚠️</span> Por favor, ingrese su nombre completo
                     </p>
                   )}
@@ -281,7 +287,7 @@ function App() {
               </div>
 
               <div className="relative">
-                <label className="block mb-2 font-medium text-gray-700 text-base">
+                <label className="block mb-2 text-base font-medium text-gray-700">
                   DNI *
                   {form.dni.length === 8 && (
                     <span className={`ml-2 text-green-500 animate-bounce ${showSuccessAnimation === 'dni' ? 'animate-pulse' : ''}`}>
@@ -290,12 +296,12 @@ function App() {
                   )}
                 </label>
                 {showSuccessAnimation === 'dni' && (
-                  <div className="absolute -top-2 -right-2 text-green-500 text-2xl animate-bounce">
+                  <div className="absolute text-2xl text-green-500 -top-2 -right-2 animate-bounce">
                     🎊
                   </div>
                 )}
                 <div className="space-y-2">
-                  <p className="text-xs text-gray-500 bg-blue-50 p-2 rounded border-l-4 border-blue-300">
+                  <p className="p-2 text-xs text-gray-500 border-l-4 border-blue-300 rounded bg-blue-50">
                     💡 <strong>Instrucción:</strong> Ingrese solo los 8 números de su DNI (sin puntos ni guiones)
                   </p>
                   <input 
@@ -319,12 +325,12 @@ function App() {
                       Dígitos: {form.dni.length}/8
                     </div>
                     {form.dni.length > 0 && form.dni.length < 8 && (
-                      <p className="text-amber-600 flex items-center gap-1">
+                      <p className="flex items-center gap-1 text-amber-600">
                         <span>⚠️</span> Faltan {8 - form.dni.length} dígitos
                       </p>
                     )}
                     {form.dni.length === 8 && (
-                      <p className="text-green-600 flex items-center gap-1">
+                      <p className="flex items-center gap-1 text-green-600">
                         <span>✅</span> DNI completo
                       </p>
                     )}
@@ -333,7 +339,7 @@ function App() {
               </div>
 
               <div>
-                <label className="block mb-2 font-medium text-gray-700 text-base">
+                <label className="block mb-2 text-base font-medium text-gray-700">
                   Teléfono *
                 </label>
                 <input 
@@ -341,13 +347,13 @@ function App() {
                   value={form.telefono} 
                   onChange={handleChange} 
                   required 
-                  className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200" 
+                  className="w-full px-4 py-3 text-base transition-all duration-200 border-2 border-gray-300 rounded-lg outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200" 
                   placeholder="+51 999 888 777" 
                 />
               </div>
 
               <div>
-                <label className="block mb-2 font-medium text-gray-700 text-base">
+                <label className="block mb-2 text-base font-medium text-gray-700">
                   Email *
                 </label>
                 <input 
@@ -356,7 +362,7 @@ function App() {
                   value={form.email} 
                   onChange={handleChange} 
                   required 
-                  className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200" 
+                  className="w-full px-4 py-3 text-base transition-all duration-200 border-2 border-gray-300 rounded-lg outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200" 
                   placeholder="ejemplo@correo.com" 
                 />
               </div>
@@ -364,38 +370,38 @@ function App() {
           </div>
 
           {/* Información Agrícola con animaciones */}
-          <div className="bg-green-50 p-6 rounded-xl border border-green-200 animate-fade-in delay-1000 hover:shadow-lg transition-all duration-300">
-            <h2 className="text-xl font-bold text-green-700 mb-4 flex items-center gap-2 animate-float">
-              <span className="animate-bounce delay-75">🌱</span> 
+          <div className="p-6 transition-all duration-300 delay-1000 border border-green-200 bg-green-50 rounded-xl animate-fade-in hover:shadow-lg">
+            <h2 className="flex items-center gap-2 mb-4 text-xl font-bold text-green-700 animate-float">
+              <span className="delay-75 animate-bounce">🌱</span> 
               Información Agrícola
             </h2>
             
             <div className="space-y-6">
-              {/* Región */}
+              {/* provincia */}
               <div>
-                <label className="block mb-2 font-medium text-gray-700 text-base">
-                  1. ¿En qué región se encuentra su cultivo? *
+                <label className="block mb-2 text-base font-medium text-gray-700">
+                  1. ¿En qué provincia se encuentra su cultivo? *
                 </label>
                 <select 
-                  name="region" 
-                  value={form.region} 
+                  name="ubicacionesHuancavelica" 
+                  value={form.provincia} 
                   onChange={handleChange} 
                   required 
-                  className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200"
+                  className="w-full px-4 py-3 text-base transition-all duration-200 border-2 border-gray-300 rounded-lg outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
                 >
-                  <option value="">Seleccione una región</option>
-                  {regiones.map(r => <option key={r} value={r.toLowerCase()}>{r}</option>)}
+                  <option value="">Seleccione una opción</option>
+                  {provincia.map(r => <option key={r} value={r.toLowerCase()}>{r}</option>)}
                 </select>
               </div>
 
               {/* Extensión */}
               <div>
-                <label className="block mb-3 font-medium text-gray-700 text-base">
+                <label className="block mb-3 text-base font-medium text-gray-700">
                   2. Extensión de su terreno:
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   {extensiones.map(ext => (
-                    <label key={ext.value} className="flex items-center p-3 bg-white border-2 border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-green-500 transition-all duration-200">
+                    <label key={ext.value} className="flex items-center p-3 transition-all duration-200 bg-white border-2 border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-green-500">
                       <input 
                         type="radio" 
                         name="extension" 
@@ -412,15 +418,15 @@ function App() {
 
               {/* Cultivos */}
               <div>
-                <label className="block mb-3 font-medium text-gray-700 text-base">
+                <label className="block mb-3 text-base font-medium text-gray-700">
                   3. ¿Qué cultivos maneja? (Seleccione los que apliquen)
                   {form.cultivos.length > 0 && (
-                    <span className="ml-2 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold">
+                    <span className="px-2 py-1 ml-2 text-xs font-bold text-green-700 bg-green-100 rounded-full">
                       {form.cultivos.length} seleccionado{form.cultivos.length > 1 ? 's' : ''}
                     </span>
                   )}
                 </label>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
                   {cultivos.map(c => {
                     const isSelected = form.cultivos.includes(c);
                     const iconMap = {
@@ -441,7 +447,7 @@ function App() {
                           onChange={handleChange} 
                           className="sr-only" 
                         />
-                        <span className="text-lg mr-2">{iconMap[c as keyof typeof iconMap]}</span>
+                        <span className="mr-2 text-lg">{iconMap[c as keyof typeof iconMap]}</span>
                         <span className="text-base font-medium">{c}</span>
                         {isSelected && (
                           <span className="ml-auto text-green-500">✓</span>
@@ -457,7 +463,7 @@ function App() {
                 <label className="block mb-3 font-medium text-gray-700">
                   4. ¿Con qué frecuencia experimenta problemas climáticos?
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   {problemas.map(p => (
                     <label key={p.value} className="flex items-center p-3 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                       <input 
@@ -496,7 +502,7 @@ function App() {
                 <label className="block mb-3 font-medium text-gray-700">
                   6. ¿Qué medio prefiere para recibir alertas?
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   {medios.map(m => (
                     <label key={m.value} className="flex items-center p-3 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                       <input 
@@ -534,7 +540,7 @@ function App() {
                 <label className="block mb-3 font-medium text-gray-700">
                   8. ¿Utiliza algún sistema de predicción climática?
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
                   {prediccion.map(p => (
                     <label key={p.value} className="flex items-center p-3 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                       <input 
@@ -556,7 +562,7 @@ function App() {
                 <label className="block mb-3 font-medium text-gray-700">
                   9. ¿Qué tan importante considera recibir recomendaciones personalizadas?
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   {importancia.map(i => (
                     <label key={i.value} className="flex items-center p-3 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                       <input 
@@ -584,7 +590,7 @@ function App() {
                   onChange={handleChange} 
                   rows={4} 
                   placeholder="Escriba sus sugerencias aquí..." 
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-green-500 focus:ring-1 focus:ring-green-500 resize-none" 
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:border-green-500 focus:ring-1 focus:ring-green-500" 
                 />
               </div>
             </div>
@@ -595,7 +601,7 @@ function App() {
             <button
               type="button"
               onClick={() => alert('📱 Te enviaremos un recordatorio amigable para continuar cuando puedas. ¡Sin presión!')}
-              className="mb-4 bg-gradient-to-r from-blue-100 to-indigo-100 hover:from-blue-200 hover:to-indigo-200 text-blue-700 py-3 px-6 rounded-full font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center gap-2 mx-auto"
+              className="flex items-center gap-2 px-6 py-3 mx-auto mb-4 font-semibold text-blue-700 transition-all duration-200 transform rounded-full shadow-md bg-gradient-to-r from-blue-100 to-indigo-100 hover:from-blue-200 hover:to-indigo-200 hover:shadow-lg hover:scale-105"
             >
               <span className="text-lg">⏰</span>
               Continuar después
@@ -628,13 +634,13 @@ function App() {
       </div>
       
       {/* Chatbot de Ayuda Flotante - Versión Simple que Funciona */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed z-50 bottom-6 right-6">
         <button
           onClick={() => {
             console.log('Botón de ayuda clickeado');
             setShowHelpModal(true);
           }}
-          className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300"
+          className="flex items-center justify-center w-16 h-16 text-white transition-all duration-300 transform bg-blue-500 rounded-full shadow-lg hover:bg-blue-600 hover:shadow-xl hover:scale-110"
           title="Ayuda y Consejos"
           type="button"
         >
@@ -645,14 +651,14 @@ function App() {
       {/* Modal de Ayuda - Versión Simplificada */}
       {showHelpModal && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
           onClick={() => setShowHelpModal(false)}
         >
           <div 
-            className="bg-white rounded-2xl max-w-md w-full mx-4 shadow-2xl"
+            className="w-full max-w-md mx-4 bg-white shadow-2xl rounded-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-blue-500 text-white p-6 rounded-t-2xl">
+            <div className="p-6 text-white bg-blue-500 rounded-t-2xl">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">🤖</span>
@@ -660,7 +666,7 @@ function App() {
                 </div>
                 <button
                   onClick={() => setShowHelpModal(false)}
-                  className="text-white hover:text-gray-200 text-2xl font-bold leading-none"
+                  className="text-2xl font-bold leading-none text-white hover:text-gray-200"
                   type="button"
                 >
                   ×
@@ -669,18 +675,18 @@ function App() {
             </div>
             
             <div className="p-6">
-              <div className="bg-blue-50 rounded-lg p-4 mb-4 border border-blue-200">
+              <div className="p-4 mb-4 border border-blue-200 rounded-lg bg-blue-50">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">{tips[currentTip]?.icon || '💡'}</span>
-                  <h4 className="font-bold text-blue-700 text-lg">{tips[currentTip]?.title || 'Ayuda'}</h4>
+                  <h4 className="text-lg font-bold text-blue-700">{tips[currentTip]?.title || 'Ayuda'}</h4>
                 </div>
-                <p className="text-gray-700 leading-relaxed">{tips[currentTip]?.message || 'Contenido de ayuda'}</p>
+                <p className="leading-relaxed text-gray-700">{tips[currentTip]?.message || 'Contenido de ayuda'}</p>
               </div>
               
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => setCurrentTip(currentTip > 0 ? currentTip - 1 : tips.length - 1)}
-                  className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+                  className="flex items-center gap-2 px-4 py-2 text-gray-700 transition-all duration-200 bg-gray-100 rounded-lg hover:bg-gray-200"
                 >
                   <span>←</span> Anterior
                 </button>
@@ -698,7 +704,7 @@ function App() {
                 
                 <button
                   onClick={() => setCurrentTip(currentTip < tips.length - 1 ? currentTip + 1 : 0)}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+                  className="flex items-center gap-2 px-4 py-2 text-white transition-all duration-200 bg-blue-500 rounded-lg hover:bg-blue-600"
                 >
                   Siguiente <span>→</span>
                 </button>
@@ -707,7 +713,7 @@ function App() {
               <div className="text-center">
                 <button
                   onClick={() => setShowHelpModal(false)}
-                  className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-200"
+                  className="px-6 py-2 font-semibold text-white transition-all duration-200 bg-green-500 rounded-lg hover:bg-green-600"
                 >
                   ¡Entendido! 👍
                 </button>
