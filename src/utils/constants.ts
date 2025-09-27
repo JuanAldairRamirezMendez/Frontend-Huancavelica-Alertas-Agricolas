@@ -1,7 +1,8 @@
+// Formulario de registro de agricultores
 export const provincia = [
   'Huancavelica (Ciudad)',
   'Provincia de Acobamba',
-  'Provincia de Angaraes', 
+  'Provincia de Angaraes',
   'Provincia de Castrovirreyna',
   'Provincia de Churcampa',
   'Provincia de Huaytará',
@@ -52,3 +53,46 @@ export const importancia = [
   { value: 'poco-importante', label: 'Poco importante' },
   { value: 'no-importante', label: 'No es importante' },
 ];
+// Constantes para la aplicación
+
+export const SEVERITY_COLORS = {
+  alto: '#dc2626',   // Rojo Alto
+  medio: '#f59e0b',  // Amarillo Medio  
+  bajo: '#10b981'    // Verde Bajo
+} as const;
+
+export const DESIGN_COLORS = {
+  verdeAgricultura: '#22c55e',
+  verdeOscuro: '#166534',
+  azulConfianza: '#3b82f6',
+  rojoAlto: '#dc2626',
+  amarilloMedio: '#f59e0b',
+  verdeBajo: '#10b981'
+} as const;
+
+export const ALERT_TYPES = {
+  lluvia_intensa: 'Lluvia Intensa',
+  helada: 'Helada',
+  sequia: 'Sequía',
+  granizo: 'Granizo',
+  viento_fuerte: 'Viento Fuerte'
+} as const;
+
+export const CROP_TYPES = {
+  papa: 'Papa',
+  maiz: 'Maíz',
+  quinua: 'Quinua',
+  cebada: 'Cebada',
+  habas: 'Habas',
+  otro: 'Otro'
+} as const;
+
+export const PHONE_PATTERN = /^\+51\d{9}$/;
+
+export const MIN_BUTTON_SIZE = 44; // px - Criterio de accesibilidad
+
+export const DATE_RANGES = {
+  last7days: 7,
+  last15days: 15,
+  last30days: 30
+} as const;

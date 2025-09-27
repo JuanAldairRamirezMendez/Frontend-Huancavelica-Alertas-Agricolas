@@ -1,16 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
 
-const queryParams = new URLSearchParams(window.location.search);
 
-if (!queryParams.has('register')) {
-  window.location.href = '/src/plataforma.html';
-} else {
-  createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
-  )
-}
+  import { createRoot } from "react-dom/client";
+  import App from "./App";
+  import { BrowserRouter as Router } from "react-router-dom";
+  import { LanguageProvider } from "./context/LanguageContext";
+  import "./index.css";
+
+  const rootElement = document.getElementById("root");
+  if (rootElement) {
+    createRoot(rootElement).render(
+      <LanguageProvider>
+        <Router>
+          <App />
+        </Router>
+      </LanguageProvider>
+    );
+  }
+  

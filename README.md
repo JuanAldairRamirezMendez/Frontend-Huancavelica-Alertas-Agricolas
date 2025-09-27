@@ -1,69 +1,44 @@
-# React + TypeScript + Vite
+# Modo demo (sin backend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+El frontend funciona con datos simulados (mock) para que puedas ver la interfaz aunque no tengas el backend/API.
 
-Currently, two official plugins are available:
+Las llamadas reales a la API están **comentadas** en:
+- `src/hooks/useAlerts.ts`
+- `src/services/alertService.ts`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Cuando tengas el backend listo, **descomenta** esas líneas y elimina los mocks para conectar con tu API real.
 
-## Expanding the ESLint configuration
+## Para conectar con el backend
+1. Asegúrate de que tu backend esté corriendo en `http://localhost:8000/api` o cambia la URL en el código/comentarios.
+2. Descomenta las llamadas reales a la API en los archivos mencionados arriba.
+3. Elimina o comenta los bloques de datos mock.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Comandos útiles
+- Instalar dependencias:
+  ```
+  npm install --legacy-peer-deps
+  ```
+- Iniciar el frontend:
+  ```
+  npm run dev
+  ```
+- Accede a la app en: [http://localhost:3000](http://localhost:3000)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Notas
+- Si ves la app "vacía" o sin datos, revisa la consola del navegador para ver si hay errores de red.
+- Si tienes dudas, revisa los comentarios en el código o consulta este README.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Recuerda:** El frontend está listo para usarse y probarse sin backend, pero para datos reales debes conectar la API siguiendo los pasos anteriores.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+  # Plataforma de Alertas Climáticas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+  This is a code bundle for Plataforma de Alertas Climáticas. The original project is available at https://www.figma.com/design/okwPuOGx4dUYXG5PDtBF0d/Plataforma-de-Alertas-Clim%C3%A1ticas.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+  ## Running the code
+
+  Run `npm i` to install the dependencies.
+
+  Run `npm run dev` to start the development server.
+  
