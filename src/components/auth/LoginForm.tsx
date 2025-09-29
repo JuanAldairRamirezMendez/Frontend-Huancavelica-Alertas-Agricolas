@@ -78,8 +78,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       if (demoUserRaw) {
         const demoUser = JSON.parse(demoUserRaw);
         if (
-          demoUser.telefono === formData.phone &&
-          demoUser.contraseña === formData.password
+          demoUser.telefono === formData.phone.trim() &&
+          demoUser.contraseña === formData.password.trim()
         ) {
           const newUser = {
             id: 'user_' + Date.now(),
@@ -95,16 +95,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           };
           localStorage.setItem('climaAlert_user', JSON.stringify(newUser));
           setSuccessMessage('✅ ¡Acceso exitoso! Entrando al dashboard...');
-          
-          // Asegurar que la navegación ocurra después de un breve delay
           setTimeout(() => {
             setIsLoading(false);
-            if (onSuccess) {
-              onSuccess();
-            } else {
-              // Fallback: redirigir directamente
-              window.location.href = '/dashboard';
-            }
+            onSuccess?.();
           }, 1000);
           return;
         }
