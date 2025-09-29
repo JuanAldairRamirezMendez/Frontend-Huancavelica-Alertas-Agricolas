@@ -95,8 +95,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           };
           localStorage.setItem('climaAlert_user', JSON.stringify(newUser));
           setSuccessMessage('✅ ¡Acceso exitoso! Entrando al dashboard...');
-          setIsLoading(false);
-          onSuccess?.();
+          
+          // Asegurar que la navegación ocurra después de un breve delay
+          setTimeout(() => {
+            setIsLoading(false);
+            if (onSuccess) {
+              onSuccess();
+            } else {
+              // Fallback: redirigir directamente
+              window.location.href = '/dashboard';
+            }
+          }, 1000);
           return;
         }
       }
