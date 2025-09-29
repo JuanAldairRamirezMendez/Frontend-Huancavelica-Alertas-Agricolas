@@ -13,7 +13,6 @@ interface LoginFormProps {
   onSuccess?: () => void;
 }
 
-
 const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showReset, setShowReset] = useState(false);
@@ -101,6 +100,35 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           }, 1000);
           return;
         }
+      }
+      const predefinedUser = {
+        telefono: '+51999999999',
+        contraseña: 'admin123'
+      };
+
+      if (
+        formData.phone.trim() === predefinedUser.telefono &&
+        formData.password.trim() === predefinedUser.contraseña
+      ) {
+        const newUser = {
+          id: 'user_' + Date.now(),
+          phone: formData.phone,
+          name: `Usuario ${formData.phone}`,
+          location: 'Huancavelica Centro',
+          isAuthenticated: true,
+          notifications: {
+            sms: true,
+            telegram: false,
+            email: false
+          }
+        };
+        localStorage.setItem('climaAlert_user', JSON.stringify(newUser));
+        setSuccessMessage('✅ ¡Acceso exitoso! Entrando al dashboard...');
+        setTimeout(() => {
+          setIsLoading(false);
+          onSuccess?.();
+        }, 1000);
+        return;
       }
       setGeneralError('Error de autenticación (demo)');
     } catch (error) {
