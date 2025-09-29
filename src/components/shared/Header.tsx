@@ -14,12 +14,6 @@ export const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Escuchar cambios de idioma en localStorage
-    const onStorage = () => {
-      setLanguage(localStorage.getItem('climaAlert_lang') || 'es');
-    };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
     const handleOnline = () => {
       setIsOnline(true);
       setLastSync(new Date());

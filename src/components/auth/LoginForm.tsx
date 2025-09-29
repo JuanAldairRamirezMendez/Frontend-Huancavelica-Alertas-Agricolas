@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, Phone, Lock, Wifi, WifiOff } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -6,7 +6,6 @@ import { Label } from '../ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Alert, AlertDescription } from '../ui/alert';
 import { Checkbox } from '../ui/checkbox';
-import { useAuth } from '../../hooks/useAuth';
 import { AuthFormData } from '../../types';
 import { PHONE_PATTERN } from '../../utils/constants';
 
@@ -14,8 +13,9 @@ interface LoginFormProps {
   onSuccess?: () => void;
 }
 
+
 const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
-  const { login, isLoading } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
   const [showReset, setShowReset] = useState(false);
   const [resetPhone, setResetPhone] = useState('+51');
   const [resetMessage, setResetMessage] = useState('');
@@ -30,7 +30,18 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   const [rememberDevice, setRememberDevice] = useState(false);
   const [allowNotifications, setAllowNotifications] = useState(true);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-    const [successMessage, setSuccessMessage] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string>('');
+
+  // Configurar usuario demo automáticamente (solo una vez)
+  useEffect(() => {
+    const demoUser = localStorage.getItem('demoUser');
+    if (!demoUser) {
+      localStorage.setItem('demoUser', JSON.stringify({
+        telefono: '+51987654321',
+        contraseña: 'password123'
+      }));
+    }
+  }, []); // Array vacío para ejecutar solo una vez
 
   const validateForm = (): boolean => {
     const newErrors: Partial<AuthFormData> = {};
@@ -56,17 +67,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setGeneralError('');
-      setSuccessMessage('');
+    setSuccessMessage('');
+    
     if (!validateForm()) return;
-    const demoUserRaw = localStorage.getItem('demoUser');
-    if (demoUserRaw) {
-      try {
+    
+    setIsLoading(true);
+    
+    try {
+      const demoUserRaw = localStorage.getItem('demoUser');
+      if (demoUserRaw) {
         const demoUser = JSON.parse(demoUserRaw);
         if (
           demoUser.telefono === formData.phone &&
           demoUser.contraseña === formData.password
         ) {
-          // Guardar usuario autenticado en climaAlert_user
           const newUser = {
             id: 'user_' + Date.now(),
             phone: formData.phone,
@@ -81,12 +95,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           };
           localStorage.setItem('climaAlert_user', JSON.stringify(newUser));
           setSuccessMessage('✅ ¡Acceso exitoso! Entrando al dashboard...');
+          setIsLoading(false);
           onSuccess?.();
           return;
         }
-      } catch {}
+      }
+      setGeneralError('Error de autenticación (demo)');
+    } catch (error) {
+      setGeneralError('Error inesperado. Intenta nuevamente.');
+    } finally {
+      setIsLoading(false);
     }
-    setGeneralError('Error de autenticación (demo)');
   };
 
   const handleReset = async (e: React.FormEvent) => {

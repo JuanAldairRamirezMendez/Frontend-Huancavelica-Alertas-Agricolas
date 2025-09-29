@@ -38,11 +38,12 @@ function DashboardLoader({ children }: { children: React.ReactNode }) {
   const { weatherData } = useWeather();
   const { recommendations } = useRecommendations();
 
+  // Solo ejecutar una vez al montar el componente
   useEffect(() => {
-    // This effect forces recommendations to refresh when dashboard mounts
-    // and ensures demo data is present
-    // No-op: hooks already load demo data instantly, but this guarantees reactivity
-  }, [crops, activeAlerts, weatherData, recommendations]);
+    // Los hooks ya cargan los datos automáticamente
+    // Este efecto solo se ejecuta una vez para inicializar
+  }, []); // Array vacío para ejecutar solo una vez
+  
   return <>{children}</>;
 }
 
@@ -51,23 +52,6 @@ function App() {
   const { alerts, activeAlerts, shareAlert, getAlertById, isLoading: isAlertsLoading } = useAlerts();
   const [selectedAlert, setSelectedAlert] = useState<Alert | null>(null);
   const navigate = useNavigate();
-
-
-// DashboardLoader: Ensures demo data and recommendations are loaded instantly
-function DashboardLoader({ children }: { children: React.ReactNode }) {
-  // Always load demo data if localStorage is empty
-  const { crops } = useCrops();
-  const { activeAlerts } = useAlerts();
-  const { weatherData } = useWeather();
-  const { recommendations } = useRecommendations();
-
-  useEffect(() => {
-    // This effect forces recommendations to refresh when dashboard mounts
-    // and ensures demo data is present
-    // No-op: hooks already load demo data instantly, but this guarantees reactivity
-  }, [crops, activeAlerts, weatherData, recommendations]);
-  return <>{children}</>;
-}
 
 
   return (
