@@ -298,3 +298,57 @@ GET /api/v1/reports/rpt_123
 ---
 
 Si quieres, genero ahora el OpenAPI (YAML) con los endpoints críticos (`auth`, `reports`, `alerts`) listo para importar en Swagger / Postman. Indícame si lo quieres en YAML o JSON y lo creo en `docs/openapi.{yml,json}`.
+
+---
+
+## 9. Uso multi‑usuario / multi‑tenant (resumen para equipos)
+
+Si tu aplicación va a ser usada por varias personas u organizaciones (fincas, cooperativas), considera uno de estos enfoques según el tamaño y requisitos:
+
+- Single‑user ownership: cada recurso tiene `user_id`. Muy simple para MVP.
+- Multi‑tenant (recomendado para equipos): añadir `tenant_id` a usuarios y recursos. Permite equipos, roles y facturación por organización.
+- Isolated tenants (DB por tenant): aislamiento máximo, backups por cliente, mayor complejidad operacional.
+
+Recomendaciones clave:
+- Usa JWT con claims `{ sub:user_id, tenant_id, roles, scopes }` y valida tokens en cada request.
+- No confíes en `userId` o `tenantId` enviados por el cliente; dedúcelos desde el token y valida ownership.
+- Añade índices `(tenant_id, created_at)` y `(tenant_id, ts)` en tablas de series temporales.
+
+Endpoints y flujo seguros:
+- `GET /api/v1/reports/:id` — backend valida `report.tenant_id === token.tenant_id` o `report.owner_user_id === token.sub`.
+- `POST /api/v1/tenants/:id/invite` — invitar usuarios a un tenant (admin only).
+- `POST /api/v1/reports/:id/share` — modelo de compartir recursos con `resource_shares`.
+
+Ejemplo de claims JWT (sugerido):
+```json
+{
+  "sub": "user_abc123",
+  "phone": "+51987654321",
+  "tenant_id": "tenant_001",
+  "roles": ["admin"],
+  "scopes": ["reports:read","reports:write"],
+  "exp": 1730000000
+}
+```
+
+Ejemplo mínimo de política RLS (Postgres) para `reports` usando `app.current_setting`:
+```sql
+-- Habilitar RLS
+ALTER TABLE reports ENABLE ROW LEVEL SECURITY;
+
+-- Policy: solo ver filas del tenant actual
+CREATE POLICY reports_tenant_policy ON reports
+  USING (tenant_id = current_setting('app.tenant_id')::uuid);
+
+-- Para conexiones desde la app, setear la variable de sesión tras validar el token:
+-- SET app.tenant_id = 'tenant_001';
+```
+
+Notas operativas:
+- Para empezar rápido, implementa ownership por `user_id`, luego migra a `tenant_id` cuando necesites equipos.
+- Considera TimescaleDB para series temporales grandes; permite particionado y retención por tenant.
+- Registra auditoría (`audit_logs`) con `user_id` y `tenant_id` para trazabilidad.
+
+---
+
+Fin del documento.
