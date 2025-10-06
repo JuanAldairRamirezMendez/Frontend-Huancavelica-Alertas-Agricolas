@@ -96,7 +96,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           setSuccessMessage('✅ ¡Acceso exitoso! Entrando al dashboard...');
           setTimeout(() => {
             setIsLoading(false);
-            window.location.href = '/dashboard'; // Redirige al dashboard
+            onSuccess?.();
           }, 1000);
           return;
         }
@@ -126,7 +126,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         setSuccessMessage('✅ ¡Acceso exitoso! Entrando al dashboard...');
         setTimeout(() => {
           setIsLoading(false);
-          window.location.href = '/dashboard'; // Redirige al dashboard
+          onSuccess?.();
         }, 1000);
         return;
       }

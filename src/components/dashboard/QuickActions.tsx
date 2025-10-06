@@ -8,15 +8,6 @@ interface QuickActionsProps {
 }
 
 export const QuickActions = ({ onNavigate }: QuickActionsProps) => {
-  // Check authentication from localStorage
-  const isAuthenticated = (() => {
-    try {
-      const user = localStorage.getItem('climaAlert_user');
-      return user && JSON.parse(user).isAuthenticated;
-    } catch {
-      return false;
-    }
-  })();
   const { language } = useLanguage();
   const actions = [
     {
@@ -99,9 +90,7 @@ export const QuickActions = ({ onNavigate }: QuickActionsProps) => {
                 variant="ghost"
                 className={`h-auto p-6 flex flex-col items-center space-y-3 min-h-[100px] ${action.bgColor} ${action.hoverColor} border border-gray-200 rounded-xl touch-friendly`}
                 onClick={() => {
-                  if (isAuthenticated) {
-                    onNavigate(action.id);
-                  }
+                  onNavigate(action.id);
                 }}
               >
                 <div className="text-3xl" role="img" aria-hidden="true">
