@@ -52,12 +52,6 @@ export default defineConfig({
         target: 'esnext',
         outDir: 'dist',
         // OPTIMIZACIONES PARA REDES LENTAS:
-        minify: 'terser',
-        terserOptions: {
-            compress: {
-                drop_console: true, // Elimina console.log en producción
-            },
-        },
         rollupOptions: {
             output: {
                 manualChunks: {
