@@ -73,11 +73,15 @@ export default defineConfig({
                 assetFileNames: 'assets/[name]-[hash].[ext]'
             }
         },
-        // Reporte de bundle para analizar tamaño
+        // MEJORA PARA PRODUCCIÓN:
+        minify: 'terser',
+        // EVITA RUIDO EN CONSOLA:
         reportCompressedSize: false,
     },
     server: {
         port: 3000,
         open: true,
     },
+    // Esto ayuda con los archivos en public/
+    publicDir: 'public',
 });
