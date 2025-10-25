@@ -187,7 +187,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
               <div className="space-y-2">
                 <Label htmlFor="phone" className="text-base">📱 Número de Teléfono</Label>
                 <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <Input
                     id="phone"
                     type="tel"
@@ -207,7 +206,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-base">🔒 Contraseña</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
