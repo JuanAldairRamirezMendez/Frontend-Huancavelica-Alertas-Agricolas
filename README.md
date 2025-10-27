@@ -12,6 +12,29 @@ Para información detallada sobre subsistemas específicos, consulta las página
 
 ---
 
+## 🔗 Enlaces rápidos
+
+
+- Getting Started / Empezando: <PERMALINK_GETTING_STARTED>
+- System Architecture / Arquitectura: <PERMALINK_SYSTEM_ARCH>
+- Authentication / Autenticación: <PERMALINK_AUTH>
+- PWA Features / PWA: <PERMALINK_PWA>
+- UI Components / Componentes UI: <PERMALINK_UI>
+- Deployment / Despliegue: <PERMALINK_DEPLOYMENT>
+
+- Código fuente (`src`):
+	- `src/README.md`: <PERMALINK_SRC_README>
+	- `src/components/README.md`: <PERMALINK_SRC_COMPONENTS>
+	- `src/hooks/README.md`: <PERMALINK_SRC_HOOKS>
+	- `src/context/README.md`: <PERMALINK_SRC_CONTEXT>
+	- `src/utils/README.md`: <PERMALINK_SRC_UTILS>
+	- `src/assets/README.md`: <PERMALINK_SRC_ASSETS>
+
+- Public / estáticos:
+	- `public/README.md`: <PERMALINK_PUBLIC_README>
+
+```
+
 ## 🎯 Propósito y contexto del sistema
 
 **Frontend Huancavelica Alertas Agrícolas** es una **Aplicación Web Progresiva (PWA)** diseñada para entregar **alertas climáticas agrícolas** a productores del departamento de **Huancavelica, Perú**.  
