@@ -12,28 +12,67 @@ Para información detallada sobre subsistemas específicos, consulta las página
 
 ---
 
-## 🔗 Enlaces rápidos
+## � Estructura del repositorio y enlaces
 
+Abajo se describe de forma natural qué contiene cada carpeta importante y, al final de cada sección, un espacio para pegar el permalink (URL absoluta en GitHub) o el enlace relativo dentro del repositorio. Reemplaza los placeholders por los enlaces reales para que los usuarios puedan saltar con un clic a la documentación correspondiente.
 
-- Getting Started / Empezando: <PERMALINK_GETTING_STARTED>
-- System Architecture / Arquitectura: <PERMALINK_SYSTEM_ARCH>
-- Authentication / Autenticación: <PERMALINK_AUTH>
-- PWA Features / PWA: <PERMALINK_PWA>
-- UI Components / Componentes UI: <PERMALINK_UI>
-- Deployment / Despliegue: <PERMALINK_DEPLOYMENT>
+### docs/ — Documentación técnica y procesos
+Contiene guías y documentos de referencia destinados a desarrolladores, operadores y gestores del proyecto. Aquí encontrarás la guía de inicio, la arquitectura del sistema, la descripción del sistema de autenticación, las características PWA, guías de UI y despliegue.
 
-- Código fuente (`src`):
-	- `src/README.md`: <PERMALINK_SRC_README>
-	- `src/components/README.md`: <PERMALINK_SRC_COMPONENTS>
-	- `src/hooks/README.md`: <PERMALINK_SRC_HOOKS>
-	- `src/context/README.md`: <PERMALINK_SRC_CONTEXT>
-	- `src/utils/README.md`: <PERMALINK_SRC_UTILS>
-	- `src/assets/README.md`: <PERMALINK_SRC_ASSETS>
+- Permalink: <PERMALINK_GETTING_STARTED>
 
-- Public / estáticos:
-	- `public/README.md`: <PERMALINK_PUBLIC_README>
+Archivos típicos (ejemplos):
+- `docs/Getting-Started.md` — pasos para dejar el entorno listo y ejecutar localmente.
+- `docs/System-Architecture.md` — diagramas y decisiones arquitectónicas.
+- `docs/Authentication.md` — flujo de login y manejo de tokens.
+- `docs/PWA-Features.md` — comportamiento offline y service worker.
+- `docs/UI-Components.md` — guía de componentes y patrones de diseño.
+- `docs/Deployment.md` — CI/CD y despliegue (Vercel, Docker).
 
+---
+
+### src/ — Código fuente de la aplicación (explicado por carpetas)
+El código que se despliega vive aquí. Está organizado en subcarpetas que separan responsabilidades:
+
+- `src/components/` — biblioteca de componentes reutilizables (botones, cards, modals). Cada componente suele incluir su propio `README.md`, tests y stories.
+- `src/pages/` — páginas o vistas ligadas al router (Login, Dashboard, Alerts, Reports, Profile).
+- `src/hooks/` — hooks personalizados que encapsulan lógica (ej.: `useAlerts`, `useAuth`).
+- `src/context/` — providers globales (AuthProvider, LanguageProvider, ThemeProvider) y hooks de consumo (`useAuth()`, `useLanguage()`).
+- `src/utils/` — utilidades puras, formateadores y clientes HTTP (`apiClient`).
+- `src/assets/` — imágenes, iconos y fuentes que deben procesarse con Vite.
+
+- Permalink raíz: <PERMALINK_SRC_README>
+- Permalink componentes: <PERMALINK_SRC_COMPONENTS>
+- Permalink hooks: <PERMALINK_SRC_HOOKS>
+- Permalink context: <PERMALINK_SRC_CONTEXT>
+- Permalink utils: <PERMALINK_SRC_UTILS>
+- Permalink assets: <PERMALINK_SRC_ASSETS>
+
+Recomendación: en el `src/components/<Nombre>/README.md` documenta props, variantes, ejemplos y tests para facilitar la adopción por otros desarrolladores.
+
+---
+
+### public/ — Archivos estáticos y manifest
+Contiene `index.html`, `manifest.json`, favicons y otros archivos que se sirven sin procesamiento. Mantén `public/` ligero y coloca assets que requieren fingerprinting en `src/assets/`.
+
+- Permalink: <PERMALINK_PUBLIC_README>
+
+---
+
+### Cómo pegar permalinks rápidamente (sugerencia)
+1. En GitHub abre el archivo deseado y copia la URL desde la barra de direcciones (usa la rama `main` o `master` según tu repo).  
+2. Sustituye el placeholder correspondiente en este README.
+
+Ejemplo en PowerShell (reemplaza la URL de ejemplo):
+
+```powershell
+((Get-Content README.md) -replace '<PERMALINK_GETTING_STARTED>', 'https://github.com/OWNER/REPO/blob/main/docs/Getting-Started.md') | Set-Content README.md
 ```
+
+Consejo de mejores prácticas
+- Usa enlaces relativos si planeas mover el repo o trabajar con forks, p. ej. `docs/Getting-Started.md` en lugar de una URL absoluta.  
+- Mantén los READMEs por carpeta actualizados y cortos: 1) propósito de la carpeta, 2) qué archivos importantes contiene, 3) cómo contribuir.
+
 
 ## 🎯 Propósito y contexto del sistema
 
