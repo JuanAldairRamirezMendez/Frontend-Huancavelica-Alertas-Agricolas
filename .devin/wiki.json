@@ -1,1 +1,301 @@
-The content has been copied to your clipboard. Please paste it here to complete the file creation.
+{
+  "repo_notes": [
+    {
+      "content": ""
+    }
+  ],
+  "pages": [
+    {
+      "title": "Resumen General",
+      "purpose": "Introducir el sistema Frontend Huancavelica Alertas Agrícolas, su propósito como plataforma de alertas agrícolas para la región Huancavelica y ofrecer un resumen general de su arquitectura.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Inicio Rápido",
+      "purpose": "Proporcionar instrucciones para configurar el entorno de desarrollo, instalar dependencias y ejecutar la aplicación localmente.",
+      "parent": "Resumen General",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Arquitectura del Sistema",
+      "purpose": "Explicar la arquitectura de alto nivel, mostrando cómo se integran el sistema de compilación, las capas de la aplicación, la gestión de datos y los componentes de la interfaz de usuario.",
+      "parent": "Resumen General",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Sistema de Compilación y Despliegue",
+      "purpose": "Documentar la canalización de compilación, la configuración de despliegue y las estrategias de optimización críticas para el rendimiento de la aplicación.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Configuración de Compilación con Vite",
+      "purpose": "Detallar la configuración de Vite, incluyendo plugins, resolución de módulos, sistema de alias y objetivos de compilación.",
+      "parent": "Sistema de Compilación y Despliegue",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Estrategia de División de Código",
+      "purpose": "Explicar la estrategia de fragmentación manual para librerías externas, optimización para redes lentas y gestión de caché.",
+      "parent": "Sistema de Compilación y Despliegue",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Despliegue en Vercel",
+      "purpose": "Documentar la configuración de despliegue en Vercel, comandos de compilación, reglas de enrutamiento para SPA y patrones de reescritura.",
+      "parent": "Sistema de Compilación y Despliegue",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Inicialización de la Aplicación",
+      "purpose": "Explicar cómo se inicializa la aplicación desde el punto de entrada HTML hasta el componente principal App en React.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Punto de Entrada HTML y Manifiesto PWA",
+      "purpose": "Documentar la estructura de index.html, la configuración del manifiesto PWA, las metaetiquetas y las declaraciones de iconos.",
+      "parent": "Inicialización de la Aplicación",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Inicialización del Núcleo React",
+      "purpose": "Explicar el archivo main.tsx, la creación del root de React, la configuración de los contextos (LanguageProvider, BrowserRouter) y el montaje del árbol de componentes.",
+      "parent": "Inicialización de la Aplicación",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Componente Principal App",
+      "purpose": "Documentar el papel del componente App.tsx como orquestador central del enrutamiento, autenticación y diseño general.",
+      "parent": "Inicialización de la Aplicación",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Sistema de Autenticación",
+      "purpose": "Documentación completa del flujo de autenticación, componente de inicio de sesión, autenticación sin conexión y gestión de sesiones.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Componente de Inicio de Sesión",
+      "purpose": "Detallar la estructura del componente LoginForm, validación de formularios, autenticación dual (demoUser y predefinedUser) y gestión de estado.",
+      "parent": "Sistema de Autenticación",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Autenticación sin Conexión",
+      "purpose": "Explicar cómo funciona la autenticación sin backend, validación de credenciales mediante localStorage, detección del estado de red y adaptaciones de la interfaz para modo offline.",
+      "parent": "Sistema de Autenticación",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Gestión de Sesiones",
+      "purpose": "Documentar la estructura del objeto de sesión de usuario, la persistencia en localStorage (clave climaAlert_user) y la propagación del estado de autenticación mediante el hook useAuth.",
+      "parent": "Sistema de Autenticación",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Protección de Rutas",
+      "purpose": "Explicar cómo se implementan los guardias de autenticación en App.tsx para proteger rutas y gestionar redirecciones de usuarios no autenticados.",
+      "parent": "Sistema de Autenticación",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Características Principales",
+      "purpose": "Resumen de las principales funciones visibles para el usuario: panel de control, alertas, cultivos, reportes y recomendaciones.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Sistema de Panel de Control",
+      "purpose": "Documentar la ruta del panel de control, el componente DashboardLoader, la inicialización de hooks de datos y la composición de componentes (WeatherWidget, DashboardSummary, AlertCards, QuickActions).",
+      "parent": "Características Principales",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Componente de Acciones Rápidas",
+      "purpose": "Explicar el componente QuickActions, sus definiciones de acciones, títulos y descripciones según idioma, y el patrón de callback onNavigate.",
+      "parent": "Características Principales",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Alertas y Detalle de Alerta",
+      "purpose": "Documentar el sistema de alertas, el componente AlertCard, el modal AlertDetail, la funcionalidad de compartir y la gestión del estado de alertas.",
+      "parent": "Características Principales",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Otras Pantallas de Funcionalidad",
+      "purpose": "Resumen breve de otras rutas de funcionalidades: ReportGenerator, CropManagement, RecommendationSystem, ConfigurationScreen, UserProfile, ActorsInfo, UserManual.",
+      "parent": "Características Principales",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Navegación y Diseño",
+      "purpose": "Documentar los componentes de navegación y la estructura general del diseño de la aplicación.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Componente de Encabezado",
+      "purpose": "Detallar las funciones del componente Header: visualización del estado de conexión, perfil del usuario, enlaces de navegación y cierre de sesión.",
+      "parent": "Navegación y Diseño",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Navegación Inferior",
+      "purpose": "Explicar el componente BottomNav, su mapeo de secciones (especialmente perfil/configuración) y el comportamiento adaptable a pantallas.",
+      "parent": "Navegación y Diseño",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Sistema de Componentes UI",
+      "purpose": "Visión general del sistema de componentes de interfaz, librerías utilizadas y enfoque de estilos.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Componentes Radix UI",
+      "purpose": "Documentar los más de 24 componentes Radix UI usados en la aplicación, sus características de accesibilidad y su integración.",
+      "parent": "Sistema de Componentes UI",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Tailwind CSS y Estilos",
+      "purpose": "Explicar la configuración de Tailwind CSS, el enfoque utility-first, variables CSS personalizadas, sistema de temas y composición dinámica de clases con clsx/tailwind-merge.",
+      "parent": "Sistema de Componentes UI",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Modo Oscuro y Temas",
+      "purpose": "Documentar el sistema de temas mediante next-themes, la sobrescritura de variables CSS para modo oscuro y el mecanismo de cambio de tema.",
+      "parent": "Sistema de Componentes UI",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Gestión de Datos",
+      "purpose": "Explicar cómo fluye la información dentro de la aplicación, incluyendo hooks personalizados, almacenamiento local y posible integración con backend.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Arquitectura de Hooks Personalizados",
+      "purpose": "Documentar los hooks de obtención de datos (useAuth, useAlerts, useCrops, useWeather, useRecommendations), sus responsabilidades y cómo se inicializan mediante DashboardLoader.",
+      "parent": "Gestión de Datos",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    }
+  ]
+}
