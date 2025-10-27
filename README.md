@@ -12,16 +12,16 @@ Para información detallada sobre subsistemas específicos, consulta las página
 
 ---
 
-## � Estructura del repositorio y enlaces
+## 📁 Estructura del repositorio y enlaces
 
 Abajo se describe de forma natural qué contiene cada carpeta importante y, al final de cada sección, un espacio para pegar el permalink (URL absoluta en GitHub) o el enlace relativo dentro del repositorio. Reemplaza los placeholders por los enlaces reales para que los usuarios puedan saltar con un clic a la documentación correspondiente.
 
 ### docs/ — Documentación técnica y procesos
 Contiene guías y documentos de referencia destinados a desarrolladores, operadores y gestores del proyecto. Aquí encontrarás la guía de inicio, la arquitectura del sistema, la descripción del sistema de autenticación, las características PWA, guías de UI y despliegue.
 
-- Permalink: <PERMALINK_GETTING_STARTED>
+- Permalink: https://github.com/JuanAldairRamirezMendez/Frontend-Huancavelica-Alertas-Agricolas/blob/b9e8a1f90a3a86bbb666c766a63fca3ace9d425b/docs/GettingStarted.md
 
-Archivos típicos (ejemplos):
+Archivos típicos:
 - `docs/Getting-Started.md` — pasos para dejar el entorno listo y ejecutar localmente.
 - `docs/System-Architecture.md` — diagramas y decisiones arquitectónicas.
 - `docs/Authentication.md` — flujo de login y manejo de tokens.
@@ -31,7 +31,7 @@ Archivos típicos (ejemplos):
 
 ---
 
-### src/ — Código fuente de la aplicación (explicado por carpetas)
+### src/ — Código fuente de la aplicación 
 El código que se despliega vive aquí. Está organizado en subcarpetas que separan responsabilidades:
 
 - `src/components/` — biblioteca de componentes reutilizables (botones, cards, modals). Cada componente suele incluir su propio `README.md`, tests y stories.
@@ -41,37 +41,22 @@ El código que se despliega vive aquí. Está organizado en subcarpetas que sepa
 - `src/utils/` — utilidades puras, formateadores y clientes HTTP (`apiClient`).
 - `src/assets/` — imágenes, iconos y fuentes que deben procesarse con Vite.
 
-- Permalink raíz: <PERMALINK_SRC_README>
-- Permalink componentes: <PERMALINK_SRC_COMPONENTS>
-- Permalink hooks: <PERMALINK_SRC_HOOKS>
-- Permalink context: <PERMALINK_SRC_CONTEXT>
-- Permalink utils: <PERMALINK_SRC_UTILS>
-- Permalink assets: <PERMALINK_SRC_ASSETS>
+- Permalink raíz: https://github.com/JuanAldairRamirezMendez/Frontend-Huancavelica-Alertas-Agricolas/blob/b9e8a1f90a3a86bbb666c766a63fca3ace9d425b/src/README.md
+- Permalink componentes: https://github.com/JuanAldairRamirezMendez/Frontend-Huancavelica-Alertas-Agricolas/blob/b9e8a1f90a3a86bbb666c766a63fca3ace9d425b/src/components/README.md
+- Permalink hooks: https://github.com/JuanAldairRamirezMendez/Frontend-Huancavelica-Alertas-Agricolas/blob/b9e8a1f90a3a86bbb666c766a63fca3ace9d425b/src/hooks/README.md
+- Permalink context: https://github.com/JuanAldairRamirezMendez/Frontend-Huancavelica-Alertas-Agricolas/blob/b9e8a1f90a3a86bbb666c766a63fca3ace9d425b/src/context/README.md
+- Permalink utils: https://github.com/JuanAldairRamirezMendez/Frontend-Huancavelica-Alertas-Agricolas/blob/b9e8a1f90a3a86bbb666c766a63fca3ace9d425b/src/utils/README.md
+- Permalink assets: https://github.com/JuanAldairRamirezMendez/Frontend-Huancavelica-Alertas-Agricolas/blob/b9e8a1f90a3a86bbb666c766a63fca3ace9d425b/src/assets/README.md
 
-Recomendación: en el `src/components/<Nombre>/README.md` documenta props, variantes, ejemplos y tests para facilitar la adopción por otros desarrolladores.
 
 ---
 
 ### public/ — Archivos estáticos y manifest
 Contiene `index.html`, `manifest.json`, favicons y otros archivos que se sirven sin procesamiento. Mantén `public/` ligero y coloca assets que requieren fingerprinting en `src/assets/`.
 
-- Permalink: <PERMALINK_PUBLIC_README>
+- Permalink: https://github.com/JuanAldairRamirezMendez/Frontend-Huancavelica-Alertas-Agricolas/blob/b9e8a1f90a3a86bbb666c766a63fca3ace9d425b/public/README.md
 
 ---
-
-### Cómo pegar permalinks rápidamente (sugerencia)
-1. En GitHub abre el archivo deseado y copia la URL desde la barra de direcciones (usa la rama `main` o `master` según tu repo).  
-2. Sustituye el placeholder correspondiente en este README.
-
-Ejemplo en PowerShell (reemplaza la URL de ejemplo):
-
-```powershell
-((Get-Content README.md) -replace '<PERMALINK_GETTING_STARTED>', 'https://github.com/OWNER/REPO/blob/main/docs/Getting-Started.md') | Set-Content README.md
-```
-
-Consejo de mejores prácticas
-- Usa enlaces relativos si planeas mover el repo o trabajar con forks, p. ej. `docs/Getting-Started.md` en lugar de una URL absoluta.  
-- Mantén los READMEs por carpeta actualizados y cortos: 1) propósito de la carpeta, 2) qué archivos importantes contiene, 3) cómo contribuir.
 
 
 ## 🎯 Propósito y contexto del sistema
@@ -240,8 +225,3 @@ Para más detalles sobre subsistemas:
 - **Datos:** ver *Data Management*  
 - **PWA:** ver *Progressive Web App Features*  
 - **Internacionalización:** ver *Internationalization*  
-
-**Fuentes:**  
-`src/App.tsx` (1–152), `package.json` (1–68)
-
----
