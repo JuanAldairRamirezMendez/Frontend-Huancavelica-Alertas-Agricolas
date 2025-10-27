@@ -87,7 +87,7 @@ export const CROP_TYPES = {
   otro: 'Otro'
 } as const;
 
-export const PHONE_PATTERN = /^\+51\d{9}$/;
+export const PHONE_PATTERN = /^\+51\s\d{9}$/;
 
 export const MIN_BUTTON_SIZE = 44; // px - Criterio de accesibilidad
 

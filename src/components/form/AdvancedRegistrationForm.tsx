@@ -78,9 +78,9 @@ interface FormData {
 }
 
 const initialForm: FormData = {
-  nombre: '', dni: '', telefono: '', email: '', provincia: '', extension: '',
-  cultivos: [], problemas_clima: '', altitud: '', medio_alerta: [],
-  experiencia: '', usa_prediccion: '', importancia_recomendaciones: '', comentarios: ''
+    nombre: '', dni: '', telefono: '+51 ', email: '', provincia: '', extension: '',
+    cultivos: [], problemas_clima: '', altitud: '', medio_alerta: [],
+    experiencia: '', usa_prediccion: '', importancia_recomendaciones: '', comentarios: ''
 };
 
 const AdvancedRegistrationForm: React.FC = () => {
@@ -180,27 +180,32 @@ const AdvancedRegistrationForm: React.FC = () => {
             <div className="space-y-1">
               <Label htmlFor="telefono">Teléfono *</Label>
               <Input
-                id="telefono"
-                name="telefono"
-                value={form.telefono}
-                onChange={e => {
-                  // Permite solo +51 y 9 dígitos, con espacios opcionales
-                  let val = e.target.value.replace(/(?!^\+)[^\d]/g, '');
-                  if (!val.startsWith('+51')) {
-                    val = '+51';
-                  }
-                  val = val.substring(0, 12); // +51 y 9 dígitos
-                  setForm(prev => ({ ...prev, telefono: val }));
-                }}
-                required
-                maxLength={12}
-                placeholder="+51999888777"
+                  id="telefono"
+                  name="telefono"
+                  value={form.telefono}
+                  onChange={e => {
+                      let value = e.target.value;
+                      // Forzar que siempre empiece con "+51 "
+                      if (!value.startsWith('+51 ')) {
+                          value = '+51 ';
+                      }
+                      // Permitir solo números después del "+51 "
+                      const numbers = value.substring(4).replace(/[^\d]/g, '');
+                      // Limitar a 9 dígitos después del "+51 "
+                      if (numbers.length <= 9) {
+                          const formattedValue = '+51 ' + numbers;
+                          setForm(prev => ({ ...prev, telefono: formattedValue }));
+                      }
+                  }}
+                  required
+                  maxLength={13} // "+51 " = 4 caracteres + 9 dígitos = 13
+                  placeholder="+51 987654321"
               />
-              {form.telefono && !/^\+51\d{9}$/.test(form.telefono) && (
-                <p className="text-xs text-amber-600 mt-1">⚠️ Ingrese un número válido: +51 seguido de 9 dígitos</p>
+              {form.telefono && !/^\+51\s\d{9}$/.test(form.telefono) && (
+                  <p className="text-xs text-amber-600 mt-1">⚠️ Ingrese 9 dígitos después del +51</p>
               )}
-              {/^\+51\d{9}$/.test(form.telefono) && (
-                <span className="ml-2 text-green-500 animate-bounce text-xs">✓ Número válido</span>
+              {/^\+51\s\d{9}$/.test(form.telefono) && (
+                  <span className="ml-2 text-green-500 animate-bounce text-xs">✓ Número válido</span>
               )}
             </div>
             {/* Email */}

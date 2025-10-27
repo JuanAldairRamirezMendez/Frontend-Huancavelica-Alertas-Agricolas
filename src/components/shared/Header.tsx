@@ -42,9 +42,28 @@ export const Header = () => {
   };
 
   const handleLogout = async () => {
-  logout();
-  navigate('/login', { replace: true });
-  };
+      if (window.confirm(language === 'qu' ? '¿Cheqaqchu wisqayta munanki?' : '¿Estás seguro de que quieres cerrar sesión?')) {
+          try {
+              // Usar la función logout del hook useAuth
+              logout();
+              // Limpiar cualquier estado adicional si es necesario
+              localStorage.removeItem('climaAlert_user');
+              // NOTA: No removemos 'demoUser' para mantener el registro
+                // Redirigir al login
+                navigate('/login', { replace: true });
+
+                // Forzar un pequeño delay para asegurar la limpieza
+                setTimeout(() => {
+                    window.location.reload(); // Recargar para limpiar estado completo
+                }, 100);
+
+            } catch (error) {
+                console.error('Error durante logout:', error);
+                // En caso de error, redirigir igual al login
+                navigate('/login', { replace: true });
+            }
+        }
+    };
 
   const handleActorsClick = () => {
     navigate('/about/actors');
@@ -112,10 +131,18 @@ export const Header = () => {
               <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
                 <User className="h-4 w-4 text-gray-600" />
               </div>
-              <div className="hidden sm:block">
-                <p className="text-sm font-medium text-gray-900">{user?.name}</p>
-                <p className="text-xs text-gray-500">{language === 'qu' ? 'Kawsaypi: ' : 'Ubicación: '}{user?.location}</p>
-              </div>
+                <div className="hidden sm:block">
+                    <p className="text-sm font-medium text-gray-900">
+                        {user?.name || 'Usuario'}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                        {language === 'qu' ? 'Kawsaypi: ' : 'Ubicación: '}
+                        {user?.location || 'Huancavelica'}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                        Tel: {user?.phone || '+51 '}
+                    </p>
+                </div>
             </div>
 
             {/* Botón de cerrar sesión solo si el usuario está autenticado */}
